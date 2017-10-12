@@ -17,6 +17,18 @@ function reversePopulate(opts, cb) {
 
 	var query = buildQuery(opts);
 
+	// Default: Add no null (or an empty array) to objects that are reverse populated.
+
+	if (opts.addEmptyObject) {
+		opts.modelArray.forEach(function (element) {
+			if (opts.arrayPop) {
+				element[opts.storeWhere] = [];
+			} else {
+				element[opts.storeWhere] = null;
+			}
+		});
+	}
+
 	// Do the query
 	query.exec(function(err, results) {
 		// If there is an error, callback with error
@@ -104,4 +116,3 @@ function populateResult(storeWhere, arrayPop, match, result) {
 		match[storeWhere] = result;
 	}
 }
-

@@ -16,7 +16,7 @@ var reversePopulate = require('mongoose-reverse-populate');
 
 //the next step requires access to the 'Author' and 'Post' mongoose model
 
-Author.find().exec(function(err, authors) {
+Author.find().lean().exec(function(err, authors) {
 
     var opts = {
         modelArray: authors,
@@ -56,6 +56,7 @@ The options object should contain the following properties...
 * populate (object / string) - populate your 'related models' with their related models, see [Query#populate](http://mongoosejs.com/docs/api.html#query_Query-populate)
 * limit (number) - limit how many results are returned for your 'related models', see [Query#limit](http://mongoosejs.com/docs/api.html#query_Query-limit)
 * sort (object / string) - sort your 'related models', see [Query#sort](http://mongoosejs.com/docs/api.html#query_Query-sort)
+* addEmptyObject (boolean) - If this is set to true, also objects which do not have any children that are reverse populated get a "default" child (if arrayPop is true, an empty array is added, otherwise null). Default: False.
 
 #### callback
 
