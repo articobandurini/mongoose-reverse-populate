@@ -77,6 +77,7 @@ function buildQuery(opts) {
 	}
 
 	if (opts.populate) query = query.populate(opts.populate);
+	if (opts.limit) query = query.limit(opts.limit);
 	if (opts.sort) query = query.sort(opts.sort);
 	return query;
 }
